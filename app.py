@@ -20,18 +20,23 @@ def search_place(addres):
     place = addres
    # display = Display(visible=False, size=(800, 600))
     #display.start()
+    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+    #chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-dev-sh-usage')
+
+    chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
-    #browser = webdriver.Chrome(executable_path= os.environ.get("CHROMEDRIVER_PATH"), chrome_options= chrome_options)
+    
+    chrome_options.binary_location = GOOGLE_CHROME_PATH
+
+    browser = webdriver.Chrome(executable_path="CHROMEDRIVER_PATH", chrome_options= chrome_options)
 
 
     xpath_address = '//*[@id="searchboxinput"]'
     button_search_latlong ='//*[@id="searchbox-searchbutton"]'
     
-    browser = webdriver.Chrome(ChromeDriverManager().install())
+    #browser = webdriver.Chrome(ChromeDriverManager().install())
     try:
         browser.get('https://www.google.com.br/maps/')
         

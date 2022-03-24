@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
         "btnfind",
-        "pyvirtualdisplay"
+        "gevent",
+        "pyvirtualdisplay",
+        "pywsgi"
     ]
 }
