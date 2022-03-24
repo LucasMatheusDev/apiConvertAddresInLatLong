@@ -13,25 +13,25 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return search_place(addres= "rua aiguara 156")
+    return search_place(addres= "rua aiguara")
 
 @app.route("/place/<addres>")
 def search_place(addres):
     place = addres
-    display = Display(visible=False, size=(800, 600))
-    display.start()
+   # display = Display(visible=False, size=(800, 600))
+    #display.start()
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-dev-sh-usage')
     chrome_options.add_argument('--no-sandbox')
-    browser = webdriver.Chrome(executable_path= os.environ.get("CHROMEDRIVER_PATH"), chrome_options= chrome_options)
+    #browser = webdriver.Chrome(executable_path= os.environ.get("CHROMEDRIVER_PATH"), chrome_options= chrome_options)
 
 
     xpath_address = '//*[@id="searchboxinput"]'
     button_search_latlong ='//*[@id="searchbox-searchbutton"]'
     
-    # browser = webdriver.Chrome("chromedriver")
+    browser = webdriver.Chrome(ChromeDriverManager().install())
     try:
         browser.get('https://www.google.com.br/maps/')
         
@@ -58,8 +58,8 @@ def search_place(addres):
 
     finally:
         browser.quit()
-        display.stop() 
+       # display.stop() 
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port="5000")
