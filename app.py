@@ -1,3 +1,4 @@
+from click import option
 from pyvirtualdisplay import Display
 import os
 from selenium import webdriver
@@ -20,18 +21,19 @@ def search_place(addres):
     place = addres
    # display = Display(visible=False, size=(800, 600))
     #display.start()
-    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
-    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
-    #chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options = webdriver.ChromeOptions()
-
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
+    # browser = webdriver.Chrome(executable_path=chrome_options.binary_location, chrome_options= chrome_options)
     
-    chrome_options.binary_location = GOOGLE_CHROME_PATH
 
-    browser = webdriver.Chrome(executable_path="CHROMEDRIVER_PATH", chrome_options= chrome_options)
-
+    GOOGLE_CHROME_BIN = os.environ.get('/app/.apt/usr/bin/google-chrome')
+    #GOOGLE_CHROME_BIN = os.environ.get('chromedriver')
+    options = webdriver.ChromeOptions()
+    options.binary_location = GOOGLE_CHROME_BIN
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument('--headless')
+    options.add_argument('--remote-debugging-port=9222')
+    
+    browser = webdriver.Chrome(executable_path=GOOGLE_CHROME_BIN,options= options )
 
     xpath_address = '//*[@id="searchboxinput"]'
     button_search_latlong ='//*[@id="searchbox-searchbutton"]'
@@ -67,4 +69,4 @@ def search_place(addres):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port="5000")
+    app.run(debug=True)
