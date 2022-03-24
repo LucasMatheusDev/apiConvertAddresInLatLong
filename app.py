@@ -1,4 +1,5 @@
-from pyvirtualdisplay import Display
+# from pyvirtualdisplay import Display
+import os
 from selenium import webdriver
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -16,13 +17,14 @@ def home():
 
 @app.route("/place/<place>")
 def search_place(place):
-    display = Display()
-    display.start()
+    # display = Display(visible=False, size=(800, 600))
+    # display.start()
     
     place = place
     xpath_address = '//*[@id="searchboxinput"]'
     button_search_latlong ='//*[@id="searchbox-searchbutton"]'
-    browser = webdriver.Chrome(ChromeDriverManager().install())
+    
+    browser = webdriver.Chrome("chromedriver")
     try:
         browser.get('https://www.google.com.br/maps/')
         
@@ -49,7 +51,7 @@ def search_place(place):
 
     finally:
         browser.quit()
-        display.stop() 
+        # display.stop() 
 
 
 if __name__ == "__main__":
