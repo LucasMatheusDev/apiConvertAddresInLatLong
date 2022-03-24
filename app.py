@@ -5,6 +5,8 @@ from selenium.webdriver.common.by import By
 from flask import Flask
 from webdriver_manager.chrome import ChromeDriverManager 
 
+
+
 app = Flask(__name__)
 
 
