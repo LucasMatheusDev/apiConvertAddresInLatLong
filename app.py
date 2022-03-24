@@ -1,5 +1,6 @@
 # from pyvirtualdisplay import Display
 import os
+from numpy import place
 from selenium import webdriver
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -13,7 +14,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "seja bem vindo"
+    return search_place(place= "rua aiguara 156")
 
 @app.route("/place/<place>")
 def search_place(place):
