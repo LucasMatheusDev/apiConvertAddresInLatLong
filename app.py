@@ -1,4 +1,4 @@
-# from pyvirtualdisplay import Display
+from pyvirtualdisplay import Display
 import os
 from selenium import webdriver
 from selenium import webdriver
@@ -18,8 +18,8 @@ def home():
 @app.route("/place/<addres>")
 def search_place(addres):
     place = addres
-    # display = Display(visible=False, size=(800, 600))
-    # display.start()
+    display = Display(visible=False, size=(800, 600))
+    display.start()
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument('--headless')
@@ -58,7 +58,7 @@ def search_place(addres):
 
     finally:
         browser.quit()
-        # display.stop() 
+        display.stop() 
 
 
 if __name__ == "__main__":
