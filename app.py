@@ -1,6 +1,5 @@
 # from pyvirtualdisplay import Display
 import os
-from numpy import place
 from selenium import webdriver
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -14,21 +13,21 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return search_place(place= "rua aiguara 156")
+    return search_place(addres= "rua aiguara 156")
 
-@app.route("/place/<place>")
-def search_place(place):
+@app.route("/place/<addres>")
+def search_place(addres):
+    place = addres
     # display = Display(visible=False, size=(800, 600))
     # display.start()
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-dev-sh-usage')
     chrome_options.add_argument('--no-sandbox')
     browser = webdriver.Chrome(executable_path= os.environ.get("CHROMEDRIVER_PATH"), chrome_options= chrome_options)
 
 
-    place = place
     xpath_address = '//*[@id="searchboxinput"]'
     button_search_latlong ='//*[@id="searchbox-searchbutton"]'
     
