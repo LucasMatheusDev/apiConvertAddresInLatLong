@@ -33,7 +33,7 @@ def search_place(addres):
     options.add_argument('--headless')
     options.add_argument('--remote-debugging-port=9222')
     
-    browser = webdriver.Chrome(executable_path=(r'./chromedriver.exe'),options= options )
+    browser = webdriver.Chrome(options= options )
 
     xpath_address = '//*[@id="searchboxinput"]'
     button_search_latlong ='//*[@id="searchbox-searchbutton"]'
