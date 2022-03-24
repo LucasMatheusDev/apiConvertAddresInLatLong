@@ -1,7 +1,6 @@
 from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from flask import Flask
 from webdriver_manager.chrome import ChromeDriverManager 
@@ -9,11 +8,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/")
 def home():
     return "seja bem vindo"
 
-@app.route('/place/<place>')
+@app.route("/place/<place>")
 def search_place(place):
     display = Display()
     display.start()
@@ -21,8 +20,6 @@ def search_place(place):
     place = place
     xpath_address = '//*[@id="searchboxinput"]'
     button_search_latlong ='//*[@id="searchbox-searchbutton"]'
-    lat_xpath = '//*[@id="lat"]'
-    long_xpath = '//*[@id="lat"]'
     browser = webdriver.Chrome(ChromeDriverManager().install())
     try:
         browser.get('https://www.google.com.br/maps/')
@@ -31,9 +28,9 @@ def search_place(place):
                 continue
         
         browser.find_element(by=By.XPATH , value= xpath_address).send_keys(place)
+
         browser.find_element(by=By.XPATH , value= button_search_latlong).click()
-        # lat_result =  browser.find_element(by=By.XPATH , value= lat_xpath)
-        # long_result =  browser.find_element(by=By.XPATH , value= long_xpath)
+
         while not browser.current_url.__contains__("@"):
                 continue
 
@@ -50,7 +47,7 @@ def search_place(place):
 
     finally:
         browser.quit()
-        # display.stop() 
+        display.stop() 
 
 
 if __name__ == "__main__":
